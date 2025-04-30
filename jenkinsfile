@@ -17,6 +17,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    sh 'chmod +x mvnw'
                     // Costruire l'applicazione usando Maven
                     sh './mvnw clean install -DskipTests'
 
