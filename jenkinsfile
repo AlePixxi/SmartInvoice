@@ -18,6 +18,7 @@ pipeline {
             steps {
                 script {
                     sh 'cd smart-invoice-eureka-server'
+                    sh 'ls'
                     sh 'chmod +x mvnw'
                     // Costruire l'applicazione usando Maven
                     sh './mvnw clean install -DskipTests'
