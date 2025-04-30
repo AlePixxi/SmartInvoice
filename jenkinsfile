@@ -21,8 +21,9 @@ pipeline {
                     chmod +x mvnw
                     cd smart-invoice-eureka-server
                     chmod +x mvnw
-                    mvnw clean install -DskipTests
                     '''
+                    // Costruire l'applicazione usando Maven
+                    sh './smart-invoice-eureka-server/mvnw clean install -DskipTests'
 
                     // Costruire l'immagine Docker
                     sh 'docker build -t $DOCKER_IMAGE:$DOCKER_TAG .'
