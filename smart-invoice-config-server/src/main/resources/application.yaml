@@ -1,0 +1,12 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: smart-invoice-config-server
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-location: file:./../config-repo
