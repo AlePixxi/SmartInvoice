@@ -20,11 +20,11 @@ pipeline {
                     sh 'chmod +x mvnw'
                     sh 'pwd'
                     sh 'cd smart-invoice-eureka-server'
-                    sh 'chmod +x mvnw'
+                    sh 'chmod +x smart-invoice-eureka-server/mvnw'
                     sh 'pwd'
                     sh 'ls'
                     // Costruire l'applicazione usando Maven
-                    sh './mvnw clean install -DskipTests'
+                    sh './smart-invoice-eureka-server/mvnw clean install -DskipTests'
 
                     // Costruire l'immagine Docker
                     sh 'docker build -t $DOCKER_IMAGE:$DOCKER_TAG .'
