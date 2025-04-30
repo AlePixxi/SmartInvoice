@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout del codice dal repository Git
-                git 'https://github.com/AlePixxi/SmartInvoice.git'
+                git url: 'https://github.com/AlePixxi/SmartInvoice.git', branch: 'main'
             }
         }
 
