@@ -20,6 +20,7 @@ pipeline {
                     sh 'chmod +x mvnw'
                     sh 'pwd'
                     sh 'cd smart-invoice-eureka-server'
+                    sh 'chmod +x mvnw'
                     sh 'pwd'
                     sh 'ls'
                     // Costruire l'applicazione usando Maven
