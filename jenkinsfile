@@ -24,11 +24,10 @@ pipeline {
                     pwd
                     ls
                     ./mvnw clean install -DskipTests
+                    docker build -t $DOCKER_IMAGE:$DOCKER_TAG .
                     '''
                     // Costruire l'applicazione usando Maven
 
-                    // Costruire l'immagine Docker
-                    sh 'docker build -t $DOCKER_IMAGE:$DOCKER_TAG .'
                 }
             }
         }
