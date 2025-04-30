@@ -1,0 +1,65 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = "spring-boot-app"  // Nome dell'immagine Docker
+        DOCKER_TAG = "latest"             // Tag per l'immagine
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout del codice dal repository Git
+                git 'https://github.com/tuo-username/tuo-repo.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    // Costruire l'applicazione usando Maven
+                    sh './mvnw clean install -DskipTests'
+
+                    // Costruire l'immagine Docker
+                    sh 'docker build -t $DOCKER_IMAGE:$DOCKER_TAG .'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                script {
+                    // Esegui i test (opzionale, ma utile)
+                    sh './mvnw test'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    // Esegui il deploy dell'immagine Docker
+                    sh 'docker run -d -p 8080:8080 --name $DOCKER_IMAGE $DOCKER_IMAGE:$DOCKER_TAG'
+                }
+            }
+        }
+
+        stage('Cleanup') {
+            steps {
+                script {
+                    // Pulisci i container Docker dopo il deploy (opzionale)
+                    sh 'docker container prune -f'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline eseguita con successo!'
+        }
+        failure {
+            echo 'La pipeline è fallita!'
+        }
+    }
+}
