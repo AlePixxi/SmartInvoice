@@ -17,6 +17,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    sh 'cd smart-invoice-eureka-server'
                     sh 'chmod +x mvnw'
                     // Costruire l'applicazione usando Maven
                     sh './mvnw clean install -DskipTests'
