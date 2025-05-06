@@ -37,7 +37,7 @@ pipeline {
                 script {
                     sh '''
                     cd smart-invoice-eureka-server
-                    aws s3 cp $DOCKER_IMAGE.tar.gz s3://docker_image_repository_bucket/
+                    aws s3 cp $DOCKER_IMAGE.tar.gz s3://docker-image-repository-bucket/
                     '''
                 }
             }
