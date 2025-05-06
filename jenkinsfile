@@ -25,9 +25,20 @@ pipeline {
                     ls
                     ./mvnw clean install -DskipTests
                     docker build -t $DOCKER_IMAGE:$DOCKER_TAG .
+                    docker save -o $DOCKER_IMAGE.tar.gz $DOCKER_IMAGE:$DOCKER_TAG
                     '''
                     // Costruire l'applicazione usando Maven
 
+                }
+            }
+        }
+        stage('Save image') {
+            steps {
+                script {
+                    sh '''
+                    cd smart-invoice-eureka-server
+                    aws s3 cp $DOCKER_IMAGE.tar.gz s3://docker_image_repository_bucket/
+                    '''
                 }
             }
         }
